@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share/share.dart';
 
 class GifPage extends StatelessWidget {
   final Map _gifData;
@@ -7,6 +8,7 @@ class GifPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var _urlGif = _gifData["images"]["fixed_height"]["url"];
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -15,10 +17,18 @@ class GifPage extends StatelessWidget {
           softWrap: true,
         ),
         backgroundColor: Colors.grey,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.share),
+            onPressed: () {
+              Share.share(_urlGif);
+            },
+          )
+        ],
       ),
       backgroundColor: Colors.black,
       body: Center(
-        child: Image.network(_gifData["images"]["fixed_height"]["url"]),
+        child: Image.network(_urlGif),
       ),
     );
   }
